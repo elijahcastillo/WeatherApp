@@ -16,6 +16,7 @@ const WeatherTop = () => {
     var d = new Date().toLocaleString().replace(",", "");
 
     setTime(d);
+    console.log(data);
   }, []);
 
   return (

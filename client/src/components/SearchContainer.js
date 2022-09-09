@@ -18,23 +18,35 @@ const SearchContainer = ({ resize }) => {
       {resize ? (
         <div className="big">
           <Search />
-          <select className="sel" onChange={(e) => sendSelect(e.target.value)}>
-            <option disabled selected>
-              Select State
-            </option>
-            {Object.keys(search).map((val) => {
-              return <option value={val}>{val}</option>;
+          <select
+            className="sel"
+            onChange={(e) => sendSelect(e.target.value)}
+            defaultValue="Select State"
+          >
+            <option disabled>Select State</option>
+            {Object.keys(search).map((val, i) => {
+              return (
+                <option key={i} value={val}>
+                  {val}
+                </option>
+              );
             })}
           </select>
         </div>
       ) : (
         <div className="small">
-          <select className="sel" onChange={(e) => sendSelect(e.target.value)}>
-            <option disabled selected>
-              Select State
-            </option>
-            {Object.keys(search).map((val) => {
-              return <option value={val}>{val}</option>;
+          <select
+            className="sel"
+            onChange={(e) => sendSelect(e.target.value)}
+            defaultValue="Select State"
+          >
+            <option disabled>Select State</option>
+            {Object.keys(search).map((val, i) => {
+              return (
+                <option key={i} value={val}>
+                  {val}
+                </option>
+              );
             })}
           </select>
 

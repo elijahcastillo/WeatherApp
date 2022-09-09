@@ -53,7 +53,7 @@ export const NavWrapper = styled.div`
     height: 200%;
     background-color: white;
     left: -350px;
-    z-index: 100;
+    z-index: 201;
     transition: all 0.8s;
     padding: 10px;
   }
@@ -68,6 +68,7 @@ export const NavWrapper = styled.div`
     background-color: rgba(0, 0, 0, 0.4);
     position: fixed;
     cursor: pointer;
+    z-index: 200;
   }
 
   .maskGone {

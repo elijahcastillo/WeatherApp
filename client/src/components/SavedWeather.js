@@ -24,13 +24,12 @@ const SavedWeather = () => {
     newState.splice(idx, 1);
     dispatch(setSavedWeather(newState));
     localStorage.setItem("savedWeather", JSON.stringify(newState));
-    //console.log(newState, savedWeather);
   };
   return (
     <SavedW>
-      {savedWeather.map((name) => {
+      {savedWeather.map((name, i) => {
         return (
-          <div className="name">
+          <div className="name" key={i}>
             <h4 onClick={() => loadWeather(name)}>{name}</h4>
             <img
               src={close}

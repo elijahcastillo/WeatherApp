@@ -38,19 +38,8 @@ const Search = () => {
     });
   }
 
-  function getGeoLocation() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        var lat = position.coords.latitude;
-        var lng = position.coords.longitude;
-        console.log(lat, lng);
-      });
-    }
-  }
-
   useEffect(() => {
     addEVListeners();
-    getGeoLocation();
 
     if (Boolean(city)) {
       setSearchActive(true);
@@ -70,9 +59,9 @@ const Search = () => {
       />
       <img src={search} onClick={sendReq} />
       <div className={searchActive ? "active activeSwitch" : "active"}>
-        {filtNames.map((val) => {
+        {filtNames.map((val, i) => {
           return (
-            <p className="name" onClick={() => setCity(val)}>
+            <p key={i} className="name" onClick={() => setCity(val)}>
               {val}
             </p>
           );

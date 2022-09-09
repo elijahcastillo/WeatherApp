@@ -10,6 +10,7 @@ import {
   getSearch,
   setSavedWeather,
   setNavSlide,
+  getData,
 } from "../features/WeatherSlice";
 import SearchContainer from "./SearchContainer";
 import SavedWeather from "./SavedWeather";
@@ -38,6 +39,15 @@ const Navbar = () => {
     }
   };
 
+  function getGeoLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((_) => {
+        console.log("GET GEO CORDS");
+        dispatch(getData("GETGEOCORDS"));
+      });
+    }
+  }
+
   useEffect(() => {
     dispatch(getSearch());
   }, []);
@@ -57,7 +67,7 @@ const Navbar = () => {
           onClick={() => dispatch(setNavSlide(!slide))}
         ></div>
         <Nav>
-          <div className="logo">
+          <div className="logo" onClick={getGeoLocation}>
             <img src={cloud} />
             <h1>Weather Now</h1>
           </div>

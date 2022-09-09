@@ -54,8 +54,11 @@ export const WTop = styled.div`
     border-radius: 12px;
   }
   @keyframes shine {
+    0% {
+      left: -50px;
+    }
     100% {
-      transform: translateX(320px);
+      transform: translateX(350px);
     }
   }
 
@@ -70,7 +73,7 @@ export const WTop = styled.div`
       #e6e7e8,
       #dfe3e3,
       #dadfdd,
-      #e4e6e2
+      #f2f4f0
     );
     position: absolute;
     left: 0;

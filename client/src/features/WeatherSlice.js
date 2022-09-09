@@ -16,7 +16,6 @@ export const getSearch = createAsyncThunk("data/getSearch", async () => {
     const res = await axios.get(
       "https://gist.githubusercontent.com/ahmu83/38865147cf3727d221941a2ef8c22a77/raw/c647f74643c0b3f8407c28ddbb599e9f594365ca/US_States_and_Cities.json"
     );
-    console.log(res);
     return res.data;
   } catch (error) {
     console.log("SEARCH ERR DATA", error);
@@ -26,9 +25,18 @@ export const getSearch = createAsyncThunk("data/getSearch", async () => {
 
 export const getData = createAsyncThunk("posts/getPosts", async (query) => {
   try {
+    let sendCity = query;
+
+    if (sendCity == "GETGEOCORDS") {
+      console.log("GEO GETDATA TRUE");
+      const geoData = await axios.get(`https://geolocation-db.com/json/`);
+      const city = geoData.data.city;
+      sendCity = city;
+    }
+
     const resCords = await axios.get(
       `https://nominatim.openstreetmap.org/search.php?q=${
-        query ? query : ""
+        sendCity ? sendCity : ""
       }&format=jsonv2`
     );
 
@@ -39,6 +47,7 @@ export const getData = createAsyncThunk("posts/getPosts", async (query) => {
     const lat = resCords.data[0].lat;
     const long = resCords.data[0].lon;
 
+    console.log(lat, long, "AFTER CALL");
     const resUrl = await axios.get(
       `https://api.weather.gov/points/${lat},${long}`
     );
@@ -46,6 +55,7 @@ export const getData = createAsyncThunk("posts/getPosts", async (query) => {
     const newUrl = resUrl.data.properties.forecast;
 
     const resData = await axios.get(newUrl);
+    console.log(resData, "resd");
 
     const data = resData.data.properties.periods;
 
@@ -78,7 +88,6 @@ export const NewsSlice = createSlice({
         state.loading = true;
       })
       .addCase(getData.fulfilled, (state, action) => {
-        //console.log(action.payload, "PAY");
         if (action.payload === true) {
           state.loading = true;
           return;
