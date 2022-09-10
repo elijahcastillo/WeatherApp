@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Nav, NavWrapper } from "../css/Navbar.styled";
 import hamburg from "../assets/whiteMenu.png";
 import cloud from "../assets/clouds.png";
-
+import revert from "../assets/revert.png";
 import add from "../assets/add.png";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,13 +11,17 @@ import {
   setSavedWeather,
   setNavSlide,
   getData,
+  changeTempUnit,
 } from "../features/WeatherSlice";
+import { C_to_F, F_to_C } from "../helper/help";
 import SearchContainer from "./SearchContainer";
 import SavedWeather from "./SavedWeather";
 
 const Navbar = () => {
-  //const [slide, setSlide] = useState(false);
-  const { data, slide, loading } = useSelector((state) => state.weather);
+  const [saved, setSaved] = useState([]);
+  const { data, slide, loading, tempChange } = useSelector(
+    (state) => state.weather
+  );
 
   const dispatch = useDispatch();
 
@@ -48,6 +52,25 @@ const Navbar = () => {
     }
   }
 
+  async function changeTemp() {
+    //let temp = [...data];
+    const newVals = data.map((val, i) => {
+      if (i == data.length - 1) {
+        return val;
+      }
+      let mod = { ...val };
+      if (tempChange) {
+        mod.temperature = Math.floor(C_to_F(mod.temperature));
+      } else {
+        mod.temperature = Math.floor(F_to_C(mod.temperature));
+      }
+
+      return mod;
+    });
+    console.log(newVals);
+    dispatch(changeTempUnit(newVals));
+  }
+
   useEffect(() => {
     dispatch(getSearch());
   }, []);
@@ -59,6 +82,7 @@ const Navbar = () => {
           <SearchContainer resize={false} />
           <div className="addPlaceSM">
             <img src={add} className="sm" onClick={savePlace} />
+            <img src={revert} onClick={changeTemp} className="rev" />
           </div>
           <SavedWeather />
         </div>
@@ -71,9 +95,11 @@ const Navbar = () => {
             <img src={cloud} />
             <h1>Weather Now</h1>
           </div>
+
           <SearchContainer resize={true} />
 
           <div className="links">
+            <img src={revert} className="add" onClick={changeTemp} />
             <img src={add} className="add" onClick={savePlace} />
             <img src={hamburg} onClick={() => dispatch(setNavSlide(!slide))} />
           </div>

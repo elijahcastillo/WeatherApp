@@ -3,12 +3,13 @@ import { WTop } from "../css/WeatherTop.styled";
 import { useSelector, useDispatch } from "react-redux";
 import { getData } from "../features/WeatherSlice";
 import { useState } from "react";
+import Forecast from "./Forecast";
 
 const WeatherTop = () => {
   const [time, setTime] = useState("");
 
   const dispatch = useDispatch();
-  const { data, loading } = useSelector((state) => state.weather);
+  const { data, loading, tempChange } = useSelector((state) => state.weather);
 
   useEffect(() => {
     dispatch(getData("oakland"));
@@ -16,7 +17,6 @@ const WeatherTop = () => {
     var d = new Date().toLocaleString().replace(",", "");
 
     setTime(d);
-    console.log(data);
   }, []);
 
   return (
@@ -44,7 +44,11 @@ const WeatherTop = () => {
               <p className="date">{time}</p>
             </div>
             <div className="mid">
-              <h1 className="temp">{data[0]["temperature"]}°</h1>
+              <h1 className="temp">
+                {data[0]["temperature"]}
+
+                <p className="unit">{tempChange ? "°C" : "°F"}</p>
+              </h1>
             </div>
             <div className="bottom">
               <p className="feel">Wind speed: {data[0]["windSpeed"]}</p>
@@ -52,6 +56,9 @@ const WeatherTop = () => {
             </div>
           </>
         )}
+        <div className="week">
+          <Forecast />
+        </div>
       </WTop>
     </>
   );

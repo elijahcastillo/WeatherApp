@@ -12,7 +12,6 @@ const SavedWeather = () => {
   const { savedWeather, slide } = useSelector((state) => state.weather);
   const dispatch = useDispatch();
   const loadWeather = (city) => {
-    console.log("load");
     dispatch(getData(city));
     dispatch(setNavSlide(!slide));
   };

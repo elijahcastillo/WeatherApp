@@ -42,6 +42,7 @@ export const Nav = styled.div`
   @media screen and (max-width: 1000px) {
     .links .add {
       display: none;
+      cursor: pointer;
     }
   }
 `;
@@ -76,15 +77,23 @@ export const NavWrapper = styled.div`
   }
 
   .sm {
-    background-color: black;
+    background-color: #578cdc;
+
     width: 35px;
     height: 35px;
     border-radius: 50%;
-    margin: 0 auto;
+
     cursor: pointer;
   }
   .addPlaceSM {
     display: flex;
-    margin-top: 10px;
+    justify-content: space-around;
+    margin-top: 15px;
+  }
+
+  .addPlaceSM .rev {
+    width: 35px;
+    height: 40px;
+    cursor: pointer;
   }
 `;

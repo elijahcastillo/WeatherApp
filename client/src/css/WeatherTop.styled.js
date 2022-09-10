@@ -30,6 +30,12 @@ export const WTop = styled.div`
     margin-bottom: 40px;
     .temp {
       font-size: 5em;
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+    .temp .unit {
+      font-size: 0.8em;
     }
   }
 
@@ -41,43 +47,16 @@ export const WTop = styled.div`
     gap: 8px;
   }
 
+  .week {
+    margin-top: 80px;
+    margin-bottom: 100px;
+  }
+
   /* Loading styles */
 
   .error {
     margin-bottom: 50px;
     text-align: center;
-  }
-  .everyLoad {
-    background: #f8f8f8;
-    position: relative;
-    overflow-x: hidden;
-    border-radius: 12px;
-  }
-  @keyframes shine {
-    0% {
-      left: -50px;
-    }
-    100% {
-      transform: translateX(350px);
-    }
-  }
-
-  .everyLoad::after {
-    content: "";
-    animation: shine 1.6s infinite;
-    width: 60px;
-    height: 100%;
-    background-image: linear-gradient(
-      to right,
-      #ebebeb,
-      #e6e7e8,
-      #dfe3e3,
-      #dadfdd,
-      #f2f4f0
-    );
-    position: absolute;
-    left: 0;
-    filter: blur(4px);
   }
 
   .nameLoad {

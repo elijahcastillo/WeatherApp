@@ -7,7 +7,6 @@ export const GlobalStyles = createGlobalStyle`
         padding: 0;
         box-sizing: border-box;
 
-
     }
 
 
@@ -22,5 +21,39 @@ export const GlobalStyles = createGlobalStyle`
     img{
         width: 100%;
     }
+
+
+    //Loading css
+    .everyLoad {
+    background: #f8f8f8;
+    position: relative;
+    overflow-x: hidden;
+    border-radius: 12px;
+  }
+  .everyLoad::after {
+    content: "";
+    animation: shine 1.6s infinite;
+    width: 60px;
+    height: 100%;
+    background-image: linear-gradient(
+      to right,
+      #ebebeb,
+      #e6e7e8,
+      #dfe3e3,
+      #dadfdd,
+      #f2f4f0
+    );
+    position: absolute;
+    left: 0;
+    filter: blur(4px);
+  }
+  @keyframes shine {
+    0% {
+      left: -50px;
+    }
+    100% {
+      transform: translateX(350px);
+    }
+  }
 
 `;
