@@ -17,8 +17,10 @@ import { C_to_F, F_to_C } from "../helper/help";
 import SearchContainer from "./SearchContainer";
 import SavedWeather from "./SavedWeather";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const Navbar = () => {
-  const [saved, setSaved] = useState([]);
   const { data, slide, loading, tempChange } = useSelector(
     (state) => state.weather
   );
@@ -27,9 +29,9 @@ const Navbar = () => {
 
   const savePlace = () => {
     if (loading) {
-      console.log("NO SAVE");
       return;
     }
+    toast.success("Location Saved!");
     const name1 = data[data.length - 1][0];
     const name2 = data[data.length - 1][2];
     const res = name1.concat(" ", name2);
@@ -53,7 +55,6 @@ const Navbar = () => {
   }
 
   async function changeTemp() {
-    //let temp = [...data];
     const newVals = data.map((val, i) => {
       if (i == data.length - 1) {
         return val;
@@ -67,7 +68,7 @@ const Navbar = () => {
 
       return mod;
     });
-    console.log(newVals);
+
     dispatch(changeTempUnit(newVals));
   }
 
@@ -82,7 +83,14 @@ const Navbar = () => {
           <SearchContainer resize={false} />
           <div className="addPlaceSM">
             <img src={add} className="sm" onClick={savePlace} />
-            <img src={revert} onClick={changeTemp} className="rev" />
+            <img
+              src={revert}
+              onClick={() => {
+                changeTemp();
+                dispatch(setNavSlide(!slide));
+              }}
+              className="rev"
+            />
           </div>
           <SavedWeather />
         </div>
@@ -105,6 +113,7 @@ const Navbar = () => {
           </div>
         </Nav>
       </NavWrapper>
+      <ToastContainer />
     </>
   );
 };

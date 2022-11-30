@@ -8,10 +8,28 @@ const Forecast = () => {
   const forcastBubble = useRef(null);
 
   useEffect(() => {
-    forcastBubble.current.addEventListener("wheel", (e) => {
+    //drag scroll effect
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    forcastBubble.current.addEventListener("mousedown", (e) => {
+      isDown = true;
+      startX = e.pageX - forcastBubble.current.offsetLeft;
+      scrollLeft = forcastBubble.current.scrollLeft;
+    });
+    forcastBubble.current.addEventListener("mouseleave", () => {
+      isDown = false;
+    });
+    forcastBubble.current.addEventListener("mouseup", () => {
+      isDown = false;
+    });
+    forcastBubble.current.addEventListener("mousemove", (e) => {
+      if (!isDown) return;
       e.preventDefault();
-      console.log(e.deltaY);
-      forcastBubble.current.scrollLeft += e.deltaY / 2;
+      const x = e.pageX - forcastBubble.current.offsetLeft;
+      const walk = (x - startX) * 1.5; //scroll-fast
+      forcastBubble.current.scrollLeft = scrollLeft - walk;
     });
   }, []);
 

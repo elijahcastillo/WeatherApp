@@ -29,7 +29,6 @@ export const getData = createAsyncThunk("posts/getPosts", async (query) => {
     let sendCity = query;
 
     if (sendCity === "GETGEOCORDS") {
-      console.log("GEO GETDATA TRUE");
       const geoData = await axios.get(`https://geolocation-db.com/json/`);
       const city = geoData.data.city;
       sendCity = city;

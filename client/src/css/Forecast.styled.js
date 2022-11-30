@@ -10,7 +10,7 @@ export const FCast = styled.div`
   border-radius: 12px;
   padding: 1rem 1.5rem;
   ::-webkit-scrollbar {
-    width: 0; /* Remove scrollbar space */
+    width: 1; /* Remove scrollbar space */
     background: transparent; /* Optional: just make scrollbar invisible */
   }
 

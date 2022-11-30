@@ -52,6 +52,9 @@ export const SearchStyle = styled.div`
     color: black;
     overflow-y: scroll;
   }
+  .active > * {
+    padding: 10px;
+  }
 
   .name {
     cursor: pointer;
@@ -59,8 +62,8 @@ export const SearchStyle = styled.div`
 
   @media only screen and (max-width: 1000px) {
     .active {
-      background-color: red;
-      color: white;
+      background-color: white;
+      color: black;
     }
   }
 `;
@@ -152,9 +155,6 @@ export const SearchContainerS = styled.div`
     border-radius: 10px;
     color: black;
   }
-  .sel:focus {
-    outline: none;
-  }
 
   .big {
     flex: 1;
@@ -163,6 +163,10 @@ export const SearchContainerS = styled.div`
     .sel {
       flex: 0.1;
     }
+  }
+
+  .sel:focus {
+    outline: none;
   }
 
   .small {
