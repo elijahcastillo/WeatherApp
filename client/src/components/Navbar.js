@@ -17,8 +17,7 @@ import { C_to_F, F_to_C } from "../helper/help";
 import SearchContainer from "./SearchContainer";
 import SavedWeather from "./SavedWeather";
 
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
   const { data, slide, loading, tempChange } = useSelector(
@@ -113,7 +112,6 @@ const Navbar = () => {
           </div>
         </Nav>
       </NavWrapper>
-      <ToastContainer />
     </>
   );
 };

@@ -5,6 +5,8 @@ import { GlobalStyles } from "./css/Global.styled";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import weatherReducer from "./features/WeatherSlice";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const store = configureStore({
   reducer: {
@@ -26,6 +28,7 @@ function App() {
           <WeatherTop />
         </Container>
       </Provider>
+      <ToastContainer />
     </>
   );
 }

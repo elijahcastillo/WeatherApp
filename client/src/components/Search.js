@@ -6,23 +6,20 @@ import { getData } from "../features/WeatherSlice";
 import { useEffect } from "react";
 
 const Search = () => {
+  const { activeSearch } = useSelector((state) => state.weather);
+  const dispatch = useDispatch();
+
   const [city, setCity] = useState("");
   const [searchActive, setSearchActive] = useState(false);
 
-  const [filtNames, setFiltNames] = useState([]);
 
-  const { activeSearch } = useSelector((state) => state.weather);
-  const dispatch = useDispatch();
   const sendReq = () => {
     dispatch(getData(city));
   };
 
-  function filterName() {
-    const result = activeSearch.filter((name) => {
-      return name.toLowerCase().includes(city.toLowerCase());
-    });
-    setFiltNames(result);
-  }
+  const filteredItems = activeSearch.filter((name) => {
+    return name.toLowerCase().includes(city.toLowerCase());
+  });
 
   function addEVListeners() {
     window.addEventListener("click", () => {
@@ -53,13 +50,12 @@ const Search = () => {
         placeholder="Search"
         onChange={(e) => {
           setCity(e.target.value);
-          filterName();
         }}
         value={city}
       />
       <img src={search} onClick={sendReq} />
       <div className={searchActive ? "active activeSwitch" : "active"}>
-        {filtNames.map((val, i) => {
+        {filteredItems.map((val, i) => {
           return (
             <p key={i} className="name" onClick={() => setCity(val)}>
               {val}

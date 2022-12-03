@@ -109,7 +109,6 @@ export const NewsSlice = createSlice({
         state.searchLoading = true;
       })
       .addCase(getSearch.fulfilled, (state, action) => {
-        console.log(action.payload, "PAYSEARCH");
         if (action.payload === true) {
           state.searchLoading = true;
           return;

@@ -12,7 +12,7 @@ const WeatherTop = () => {
   const { data, loading, tempChange } = useSelector((state) => state.weather);
 
   useEffect(() => {
-    dispatch(getData("oakland"));
+    dispatch(getData("South Kingstown, Rhode Island"));
 
     var d = new Date().toLocaleString().replace(",", "");
 

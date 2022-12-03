@@ -7,6 +7,7 @@ import {
   setNavSlide,
   setSavedWeather,
 } from "../features/WeatherSlice";
+import { toast } from "react-toastify";
 
 const SavedWeather = () => {
   const { savedWeather, slide } = useSelector((state) => state.weather);
@@ -17,7 +18,7 @@ const SavedWeather = () => {
   };
 
   const deleteWeather = (name) => {
-    console.log("Delete");
+    toast.success("Location Deleted");
     let newState = [...savedWeather];
     const idx = savedWeather.findIndex((item) => item == name);
     newState.splice(idx, 1);
